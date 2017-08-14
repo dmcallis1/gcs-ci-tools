@@ -4,14 +4,18 @@ import sys
 if len(sys.argv) != 3:
     sys.exit(1)
 
-# Delivery config obtained from VCS
-vcs_config = open(sys.argv[1], 'r')
-vcs_config_data = json.load(vcs_config)
+try:
+    # Delivery config obtained from VCS
+    vcs_config = open(sys.argv[1], 'r')
+    vcs_config_data = json.load(vcs_config)
 
-# Delivery config obtained from PM
-pm_config = open(sys.argv[2], 'r')
-pm_config_data = json.load(pm_config)
-
+    # Delivery config obtained from PM
+    pm_config = open(sys.argv[2], 'r')
+    pm_config_data = json.load(pm_config)
+except Exception as e:
+    print 'Exception encountered parsing json.'
+    print e
+    
 print 'Metadata version: ' + str(pm_config_data['propertyVersion'])
 print 'VCS version: ' + str(vcs_config_data['propertyVersion'])
 
