@@ -12,8 +12,8 @@ vcs_config_data = json.load(vcs_config)
 pm_config = open(sys.argv[2], 'r')
 pm_config_data = json.load(pm_config)
 
-print 'Metadata version: ' + pm_config_data['propertyVersion']
-print 'VCS version: ' + vcs_config_data['propertyVersion']
+print 'Metadata version: ' + str(pm_config_data['propertyVersion'])
+print 'VCS version: ' + str(vcs_config_data['propertyVersion'])
 
 # Compare the delivery config versions
 if pm_config_data['propertyVersion'] >= vcs_config_data['propertyVersion']:
