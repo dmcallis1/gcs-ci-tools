@@ -22,8 +22,8 @@ print ('VCS version: ' + str(vcs_config_data['propertyVersion']))
 # Compare the delivery config versions
 if pm_config_data['propertyVersion'] > vcs_config_data['propertyVersion']:
     if 'CI_READY' in pm_config_data['comments']:
-        print (Config ' + sys.argv[2] + ' is ready for integration.)
+        print ('Config ' + sys.argv[2] + ' is ready for integration.')
         sys.exit(0)
 else:
-    print (Config ' + sys.argv[2] + ' not ready for integration, exiting.)
+    print ('Config ' + sys.argv[2] + ' not ready for integration, exiting.')
     sys.exit(1)
