@@ -1,5 +1,7 @@
 import json
 import sys
+import re
+
 
 if len(sys.argv) != 3:
     sys.exit(1)
@@ -23,6 +25,8 @@ print ('VCS version: ' + str(vcs_config_data['propertyVersion']))
 if pm_config_data['propertyVersion'] > vcs_config_data['propertyVersion']:
     try:
         if 'CI_READY' in pm_config_data['comments']:
+            comment = re.sub('(CI_READY)', r'\1', pm_config_data['comments'])
+            pm_config_data['comments'] = comment
             print ('Config ' + sys.argv[2] + ' is ready for integration.')
             sys.exit(0)
     except Exception as e:
