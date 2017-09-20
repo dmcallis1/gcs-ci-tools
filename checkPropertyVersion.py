@@ -21,9 +21,13 @@ print ('VCS version: ' + str(vcs_config_data['propertyVersion']))
 
 # Compare the delivery config versions
 if pm_config_data['propertyVersion'] > vcs_config_data['propertyVersion']:
-    if 'CI_READY' in pm_config_data['comments']:
-        print ('Config ' + sys.argv[2] + ' is ready for integration.')
-        sys.exit(0)
+    try:
+        if 'CI_READY' in pm_config_data['comments']:
+            print ('Config ' + sys.argv[2] + ' is ready for integration.')
+            sys.exit(0)
+    except Exception as e:
+        print ('Property is missing \'comments\' attribute.')
+        print (e)
 else:
     print ('Config ' + sys.argv[2] + ' not ready for integration, exiting.')
     sys.exit(1)
