@@ -13,7 +13,7 @@ product = 'prd_SPM'
 ruleFormat = 'latest'
 # Full path to '.edgerc' file
 # Ex: /home/user/.edgerc
-edgeRcLoc = ''
+edgeRcLoc = '/root/.edgerc'
 
 # sys.argv[1] = source JSON (The variables we will extract)
 argLen = len(sys.argv)
