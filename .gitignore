@@ -1,3 +1,6 @@
 prop/
 venv*
 .idea/
+lib/__pycache__*
+config.ex.yaml
+configParse.py

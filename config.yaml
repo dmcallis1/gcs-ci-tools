@@ -1,0 +1,5 @@
+edgerc:
+  location: /root/.edgerc
+  section: default
+property:
+  propertyId: prp_12345
