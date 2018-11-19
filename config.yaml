@@ -3,3 +3,5 @@ edgerc:
   section: default
 property:
   propertyId: prp_12345
+  productType: prd_SPM
+  ruleFormat: latest

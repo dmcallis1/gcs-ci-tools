@@ -4,18 +4,26 @@ from akamai.edgegrid import EdgeGridAuth, EdgeRc
 import json
 import logging
 import sys
+from lib import ciHelper
 
 logging.basicConfig(level='INFO', format='%(asctime)s %(levelname)s %(message)s')
 log = logging.getLogger()
 
-# Run time settings
-product = 'prd_SPM'
-ruleFormat = 'latest'
-# Full path to '.edgerc' file
-# Ex: /home/user/.edgerc
-edgeRcLoc = '/root/.edgerc'
+# Initialize run-time configurations
+try:
+    config = ciHelper.loadConfig('config.ex.yaml')
+except Exception as e:
+    log.error('Error loading config file...')
+    log.error(e)
+    sys.exit(1)
 
-# sys.argv[1] = source JSON (The variables we will extract)
+edgeRcLoc = config['edgerc']['location']
+edgeRcSection = config['edgerc']['section']
+propertyId = config['property']['propertyId']
+product = config['property']['productType']
+ruleFormat = config['property']['ruleFormat']
+
+# sys.argv[1] = source JSON (The JSON we will validate)
 argLen = len(sys.argv)
 log.debug('Found ' + str(argLen) + ' command line arguments.')
 

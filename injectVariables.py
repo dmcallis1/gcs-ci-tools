@@ -14,7 +14,7 @@ argLen = len(sys.argv)
 
 if argLen != 3:
     log.error('Incorrect number of arguments: ' + str(argLen))
-    sys.exit()
+    sys.exit(1)
 
 log.debug('Passed arguments - 1: ' + str(sys.argv[1]) + ' (source variables) 2: ' + str(sys.argv[2]) + ' (source metadata)')
 
