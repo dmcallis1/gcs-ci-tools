@@ -75,10 +75,15 @@ for activation in activations:
 
 result = ciHelper.getRuleTreeFromVersion(session, baseurl, propertyId, version)
 log.info('Updating property comments, appending version number (' + version + ')')
-comments = result['comments']
-comments = '(original comments) ' + comments + ' (pipeline comments) Based on GOLD version: ' + version
+
+if 'comments' not in result:
+    comments = ''
+else:
+    comments = result['comments']
+    comments = '(original comments) ' + comments + ' (pipeline comments) Based on GOLD version: ' + version
+    result['comments'] = comments
+
 log.info('New comments: \'' + comments + '\'')
-result['comments'] = comments
 
 
 outFile = str(result['propertyName'] + '.json')
