@@ -7,9 +7,6 @@ import os
 logging.basicConfig(level='DEBUG', format='%(asctime)s %(levelname)s %(message)s')
 log = logging.getLogger()
 
-# sys.argv[1] = source JSON (The variables we will use as our basis for validation)
-# sys.argv[2] = variable JSON (The variables we will check against the base JSON, argv[1])
-
 parser = argparse.ArgumentParser(description='Akamai CI toolkit -> ' + os.path.basename(__file__))
 parser.add_argument('--file', '-f', action="store", default=[], help="The JSON of the template property to validate.")
 parser.add_argument('--variables', '-v', action="store", default="latest", help="The variable file from VCS.")
