@@ -2,36 +2,37 @@ import json
 import sys
 import logging
 import os
-
-# Variables
-destDir = './var/'
+import argparse
 
 logging.basicConfig(level='DEBUG', format='%(asctime)s %(levelname)s %(message)s')
 log = logging.getLogger()
 
-# sys.argv[1] = source JSON (The variables we will extract)
-argLen = len(sys.argv)
+parser = argparse.ArgumentParser(description='Akamai CI toolkit -> ' + os.path.basename(__file__))
+parser.add_argument('--file', '-f', action="store", default=[], help="The JSON of the template property to transform into an environment release artifact.")
+parser.add_argument('--variables', '-v', action="store", default="latest", help="The variable file from VCS.")
+args = parser.parse_args()
 
-if argLen != 3:
-    log.error('Incorrect number of arguments: ' + str(argLen))
+
+if len(sys.argv) <=2:
+    parser.print_help()
     sys.exit(1)
 
-log.debug('Passed arguments - 1: ' + str(sys.argv[1]) + ' (source variables) 2: ' + str(sys.argv[2]) + ' (source metadata)')
 
 try:
     # Take variables from SOURCE and modify the OUTPUT
-    sourceData = json.load(open(sys.argv[1]))
-    outputData = json.load(open(sys.argv[2]))
+    outputData = json.load(open(args.file))
+    log.info('Source metadata: ' + args.file)
+    sourceData = json.load(open(args.variables))
+    log.info('Variables: ' + args.variables)
 except Exception as e:
     log.error('Error loading input JSON.')
     log.error(e)
 
 log.info('Transforming source JSON with target variable values.')
-log.info('Target JSON contains ' + str(len(sourceData)) + ' variable entries.')
-
+log.info('Source JSON contains ' + str(len(sourceData)) + ' variable entries.')
 outputData['rules']['variables'] = sourceData
 
-destinationFile = os.path.basename(sys.argv[1].replace('.var.json', '.json'))
+destinationFile = os.path.basename(args.variables.replace('.var.json', '.json'))
 
 try:
     # Write output to destination file
